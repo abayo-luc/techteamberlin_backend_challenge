@@ -36,4 +36,4 @@ This endpoint return a list of all articles by the author with this id including
 ## Search article by title
 
 `GET /search?searchQuery=value`
-This endpoint takes a search query as request parameter and return a list of articles from the database where the articles title matches the search query. The result includes an id, a creation timestamp, the title, the url, the language and the author.
+This endpoint takes a search query as queru param and return a list of articles from the database where the articles title matches the search query. The result includes an id, a creation timestamp, the title, the url, the language and the author.
