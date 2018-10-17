@@ -1,0 +1,25 @@
+{
+  "name": "techteamberlin_backend_challenge",
+  "version": "1.0.0",
+  "description": "This app is build with NodeJs, it pulls news articles from the currentsapi.services API and stores them in a PostgreSQL database.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abayo-luc/techteamberlin_backend_challenge.git"
+  },
+  "author": "luc",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abayo-luc/techteamberlin_backend_challenge/issues"
+  },
+  "homepage": "https://github.com/abayo-luc/techteamberlin_backend_challenge#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "pg": "^7.5.0",
+    "sequelize": "^4.39.1"
+  }
+}
