@@ -11,6 +11,10 @@ const app = express();
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use((req, res, next) => {
+   res.header('Access-Control-Allow-Origin', '*');
+   next();
+});
 app.use("/", routers);
 
 // set the port depending on Dev Environment (production or development)
