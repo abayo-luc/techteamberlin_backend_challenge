@@ -26,6 +26,10 @@ Install [postgreSql](https://www.postgresql.org/download/) and [sequelize-cli](h
 => migrate database schema by running the following sequelize command
 `sequelize db:migrate`
 
+## Ruing the test
+
+`npm run test`
+
 ## Fetch the 10 latest articles
 
 `GET /fetch_articles`
