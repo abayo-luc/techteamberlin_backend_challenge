@@ -12,7 +12,7 @@ const { createArticle } = require("../helpers/model.help");
 
 //@end point /fetch_articles
 //@description: this endpoint fetch the 10 latest articles from the api and save them in the database.
-router.get("/fetch_articles", (req, res) => {
+router.post("/fetch_articles", (req, res) => {
   axios
     .get("https://api.currentsapi.services/v1/latest-news", {
       headers: { Authorization: process.env.CURRENT_API_KEY }
@@ -21,17 +21,51 @@ router.get("/fetch_articles", (req, res) => {
       const {
         data: { news }
       } = response;
-      let sortedArticles = news
+      const sortedArticles = news
         .sort((a, b) => new Date(b.published) - new Date(a.published))
-        .splice(0, 10);
-      for (let article of sortedArticles) {
-        createArticle(article);
-      }
-      res.json(sortedArticles);
+        .splice(0, 10)
+        .map(article => {
+          return {
+            title: article.title,
+            language: article.language,
+            published: article.published,
+            authorId: article.author, //at this point authorId hold author name.
+            url: article.url
+          };
+        });
+      //the array containing the name of authors, to be saved in db
+      const newUsers = sortedArticles.map(article => {
+        return {
+          name: article.authorId // authorId hold author name
+        };
+      });
+      //bulkCreate users, and ignore the user if she or he already exisit int he database
+      User.bulkCreate(newUsers, {
+        returning: true,
+        ignoreDuplicates: true
+      })
+        .then(users =>
+          User.findAll()
+            .then(users => {
+              let articlesWithAuthorId = sortedArticles.map(article => {
+                let user = users.find(user => user.name == article.authorId);
+                return { ...article, authorId: user.id }; //on authorId attribute, replace name with the id
+              });
+              //create article in bulk, which will ignore new article if it already exist.
+              Article.bulkCreate(articlesWithAuthorId, {
+                returning: true,
+                ignoreDuplicates: true
+              })
+                .then(articles => res.json(articles))
+                .catch(err => res.status(400).send(err));
+            })
+            .catch(err => res.status(400).send(err))
+        )
+        .catch(err => res.status(400).send(err));
     })
     .catch(err => {
       console.log(err); //for debugging
-      res.status(400).json({ err: "API failed" });
+      res.status(500).send(err);
     });
 });
 
@@ -50,7 +84,7 @@ router.get("/articles", (req, res) => {
     .then(articles => res.json(articles))
     .catch(err => {
       console.log(err); //for Debugging
-      res.status(500).json({ err: "Articles couldn't be fetched" });
+      res.status(500).send(err);
     });
 });
 
@@ -70,7 +104,7 @@ router.get("/users/:id/articles", (req, res) => {
     })
     .catch(err => {
       console.log(err); //for Debugging
-      res.status(500).json({ msg: "Sorry! something went wrong" });
+      res.status(500).send({ msg: "Sorry! something went wrong" });
     });
 });
 
@@ -99,4 +133,5 @@ router.get("/search", (req, res) => {
       res.status(500).json({ msg: "Sorry! something went wrong" });
     });
 });
+
 module.exports = router;

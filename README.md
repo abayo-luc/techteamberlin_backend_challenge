@@ -18,6 +18,13 @@ Create .env faile and to sure your database and password as DATABASE_USERNAME an
 
 Install [postgreSql](https://www.postgresql.org/download/) and [sequelize-cli](http://docs.sequelizejs.com/) on your local machine.
 
+install sequelize-cli globally to work with postgres
+`npm install -g sequelize-cli`
+create project database by running the following sequelize command
+`sequelize db:create`
+migrate database schema by running the following sequelize command
+`sequelize db:migrate`
+
 ## Fetch the 10 latest articles
 
 `GET /fetch_articles`
