@@ -9,11 +9,11 @@ const config = {
     dialect: "postgres"
   },
   test: {
-    username: "root",
-    password: null,
-    database: "database_test",
+    username: process.env.DATABASE_USERNAME,
+    password: process.env.DATABASE_PASSWORD,
+    database: "techteamberlin_backend_challenge",
     host: "127.0.0.1",
-    dialect: "mysql"
+    dialect: "postgres"
   },
   production: {
     username: "root",

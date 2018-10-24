@@ -7,9 +7,9 @@ This app is build with NodeJs, it pulls news articles from the currentsapi.servi
 To install all dependencies.
 
 ### `npm run server`
-To runs your app in development mode with nodemom. 
-Open [http://localhost:5000](http://localhost:5000) to access all end point.
 
+To runs your app in development mode with nodemom.
+Open [http://localhost:5000](http://localhost:5000) to access all end point.
 
 ## Configurage .env variable
 
@@ -19,11 +19,11 @@ Create .env faile and to sure your database and password as DATABASE_USERNAME an
 
 Install [postgreSql](https://www.postgresql.org/download/) and [sequelize-cli](http://docs.sequelizejs.com/) on your local machine.
 
-install sequelize-cli globally to work with postgres
+=> install sequelize-cli globally to work with postgres
 `npm install -g sequelize-cli`
-create project database by running the following sequelize command
+=> create project database by running the following sequelize command
 `sequelize db:create`
-migrate database schema by running the following sequelize command
+=> migrate database schema by running the following sequelize command
 `sequelize db:migrate`
 
 ## Fetch the 10 latest articles

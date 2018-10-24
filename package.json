@@ -4,7 +4,7 @@
   "description": "This app is build with NodeJs, it pulls news articles from the currentsapi.services API and stores them in a PostgreSQL database.",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha --timeout 100000",
     "start": "node server.js",
     "server": "nodemon server.js"
   },
@@ -27,6 +27,9 @@
     "sequelize": "^4.39.1"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.0",
+    "mocha": "^5.2.0",
     "nodemon": "^1.18.4"
   }
 }
