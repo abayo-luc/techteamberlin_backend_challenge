@@ -7,8 +7,9 @@ This app is build with NodeJs, it pulls news articles from the currentsapi.servi
 To install all dependencies.
 
 ### `npm run server`
+To runs your app in development mode with nodemom. 
+Open [http://localhost:5000](http://localhost:5000) to access all end point.
 
-To runs your app in development mode with nodeem.
 
 ## Configurage .env variable
 
